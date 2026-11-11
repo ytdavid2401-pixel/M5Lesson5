@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            My Delivery Tracker
+        </title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <h1>
+            My Delivery Tracker
+        </h1>
+        <button onclick="savetheOrder()">
+            Save Order
+        </button>
+        <button onclick="startDelivery()">
+            Start Delivery
+        </button>
+        <div>JSON text<span id="JSON-text"></span></div>
+        <div>Loaded item<span id="Loaded-Item"></span></div>
+        <div>Loaded Price<span id="Loaded-Price"></span></div>
+        <div>Status<span id="status"></span></div>
+        <div>Result<span id="result"></span></div>
+        <script>
+            var order={
+                item:"Pizza",Price:8, Shop:"City Restaurant"
+            };
+            function savetheOrder(){
+                var JSONtext=JSON.stringify(order);
+                var LoadedOrder=JSON.parse(JSONtext);
+                document.getElementById("JSON-text").innerHTML=JSONtext;
+                 document.getElementById("Loaded-Item").innerHTML=LoadedOrder.Item;
+                  document.getElementById("Loaded-Price").innerHTML=LoadedOrder.Price;
+            }
+            
+            function delay(ms) {
+
+return new Promise(function(resolve) {
+
+setTimeout(resolve, ms);
+
+});
+
+}
+
+// async and await — track the delivery step by step
+
+async function startDelivery() {
+
+document.getElementById("result").innerHTML = "";
+
+// setTimeout with a callback function — runs after 1 second
+
+document.getElementById("status").innerHTML = "Order received!";
+
+setTimeout(function() {
+
+document.getElementById("status").innerHTML = "Kitchen is preparing...";
+
+}, 1000);
+
+// await — pause for 3 seconds
+
+await delay(3000);
+
+document.getElementById("status").innerHTML = "Out for delivery!";
+
+// await — pause for 2 seconds
+
+await delay(2000);
+
+document.getElementById("result").innerHTML = "Your order has arrived!";
+
+}
+        </script>
+    </body>
+</html>
